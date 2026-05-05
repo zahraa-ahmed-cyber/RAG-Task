@@ -1,0 +1,21 @@
+.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+*.log
+.env
+
+# Data (large files)
+# data/vectorstore/
+# data/finetuned_model/
+# data/raw/
+# data/processed/
+
+# Keep directory structure
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
