@@ -86,7 +86,7 @@ pip install -r requirements.txt
 
 ```bash
 cp .env.example .env
-# Edit .env — set OPENAI_API_KEY (or use local LLM via OPENAI_BASE_URL)
+# Edit .env — set GROK_API_KEY (or use local LLM via GROK_BASE_URL)
 ```
 
 ### 3. Prepare data
@@ -224,7 +224,7 @@ Measures keyword hit rate and source retrieval accuracy across 6 test cases.
 | Variable | Default | Description |
 |---|---|---|
 | `OPENAI_API_KEY` | — | Required for OpenAI LLM/embeddings |
-| `LLM_MODEL` | `gpt-4o-mini` | LLM model name |
+| `LLM_MODEL` | `llama3-8b` | LLM model name |
 | `EMBEDDING_PROVIDER` | `local` | `local` or `openai` |
 | `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | Sentence-transformers model |
 | `VECTOR_STORE_TYPE` | `faiss` | `faiss` or `chroma` |
