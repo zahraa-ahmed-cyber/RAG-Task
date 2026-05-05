@@ -1,0 +1,101 @@
+{
+  "info": {
+    "name": "Chatbot RAG — API examples",
+    "description": "Examples for streaming, chat history, search, ingest, health, and chat with optional k.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/health"
+      }
+    },
+    {
+      "name": "Chat — simple",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"What is Stripe Checkout?\"\n}"
+        },
+        "url": "{{base_url}}/chat"
+      }
+    },
+    {
+      "name": "Chat — with history + k",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"Can you restate that more briefly?\",\n  \"k\": 12,\n  \"history\": [\n    {\n      \"user\": \"What is Stripe Checkout?\",\n      \"assistant\": \"Checkout is Stripe’s hosted payment page that collects payment details securely.\"\n    }\n  ]\n}"
+        },
+        "url": "{{base_url}}/chat"
+      }
+    },
+    {
+      "name": "Chat — streaming (SSE)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"Explain Stripe webhooks in one short paragraph.\",\n  \"stream\": true,\n  \"k\": 12\n}"
+         },
+        "url": "{{base_url}}/chat"
+      }
+    },
+    {
+      "name": "Search — debug retrieval",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/search?q=partial+refund+fees&k=10"
+      }
+    },
+    {
+      "name": "Ingest — upload PDF (pick file in Body)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": "{{base_url}}/ingest"
+      }
+    },
+    {
+      "name": "Ingest — wrong extension (expect 415)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": [],
+              "description": "Attach any .xyz or unsupported type to demo error handling."
+            }
+          ]
+        },
+        "url": "{{base_url}}/ingest"
+      }
+    }
+  ]
+}
